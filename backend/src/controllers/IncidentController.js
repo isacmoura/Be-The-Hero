@@ -36,8 +36,8 @@ module.exports = {
         const { id } = request.params;
         const ong_id = request.headers.authorization;
 
-        const incident = connection('incidents').where('id', id).select('ong_id').first();
-
+        const incident = await connection('incidents').where('id', id).select('ong_id').first();
+        
         if(incident.ong_id != ong_id) {
             return response.status(401).json({ error: 'Unauthorized' });
         }
